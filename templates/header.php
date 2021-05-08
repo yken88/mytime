@@ -29,8 +29,6 @@ $name = $_SESSION['name'] ?? 'Guest';
             padding: 20px;
         }
     </style>
-    <!--Chart.jsの読み込み -->
-    <script src="js/chart.js"></script>
 
 </head>
 <body class="grey lighten-4">
