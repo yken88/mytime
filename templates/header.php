@@ -9,6 +9,8 @@ if ($_SERVER['QUERY_STRING'] == 'noname') {
 $name = $_SESSION['name'] ?? 'Guest';
 ?>
 
+<!DOCTYPE html>
+<html lang="en">
 <head>
     <title>My Time</title>
     <!-- Compiled and minified CSS -->
