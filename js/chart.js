@@ -1,13 +1,11 @@
-let times = timesValue;
-
 var ctx = document.getElementById("myChart").getContext('2d');
 var myChart = new Chart(ctx, {
     type: 'doughnut',
     data: {
-        labels: ["あか", "青", "黄色", "緑", "紫", "橙"],
+        labels: task_names,
         datasets: [{
-            label: '得票数',
-            data: times,
+            label: '',
+            data: timers, // index.phpで取得した時間の配列
             backgroundColor: [
                 'rgba(255, 99, 132, 0.2)',
                 'rgba(54, 162, 235, 0.2)',
@@ -28,12 +26,14 @@ var myChart = new Chart(ctx, {
         }]
     },
     options: {
+        responsive: true,
+        legend: {
+            position: 'bottom',
+        },
         scales: {
-            yAxes: [{
-                ticks: {
-                    beginAtZero: true
-                }
-            }]
+            ticks: {
+                display: false
+            }
         }
     }
 });
