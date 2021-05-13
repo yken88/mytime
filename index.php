@@ -1,30 +1,11 @@
 <?php
 ini_set('display_errors', "On");
-include 'config/db_connect.php';
+require_once 'TasksController.php';
 
-// times を全て取得
-$sql = 'SELECT * FROM times ORDER BY created_at';
-$result = mysqli_query($conn, $sql);
+$task = new TasksController;
+list($times, $task_names, $timers) = $task->Index();
 
-// $result 配列として取得する。
-$times = mysqli_fetch_all($result, MYSQLI_ASSOC);
-
-// free result from memory
-mysqli_free_result($result);
-
-// タスク名と時間を取得。chart.jsに渡す。
-$task_names = [];
-$timers = [];
-for ($i = 0; $i < count($times); $i++) {
-    array_push($task_names, $times[$i]["task_name"]);
-    array_push($timers, (int) $times[$i]["time"]);
-}
-
-$task_names = json_encode($task_names);
-$timers = json_encode($timers);
-// close connection
-mysqli_close($conn);
-
+$total_time = $task->getTotalTime();
 ?>
 
 <?php include 'templates/header.php'?>
@@ -35,6 +16,9 @@ mysqli_close($conn);
     <canvas id="myChart"></canvas>
 </div>
 <table class="col s4 grey-text">
+<div class="col s4 card-panel purple lighten-4 center">
+    <p class="grey-text">Total Time : <?php echo $total_time; ?></p>
+</div>
         <thead>
           <tr>
               <th>Task name</th>
@@ -58,8 +42,8 @@ mysqli_close($conn);
 
 <?php include 'templates/footer.php'?>
 <script>
-const task_names = <?php echo $task_names; ?>// php to js タスク名の配列の受け渡し。
-const timers = <?php echo $timers; ?>// php to js 時間の配列の受け渡し。
+const task_names = <?php echo $task_names; ?>// $task_namesをchart.jsへ
+const timers = <?php echo $timers; ?> // $timersをchart.jsへ
 </script>
 <script src="js/chart.js"></script>
 
