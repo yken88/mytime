@@ -1,11 +1,16 @@
 <?php
-ini_set('display_errors', "On");
+// ini_set('display_errors', "On");
 require_once 'TasksController.php';
 
 $task = new TasksController;
-list($times, $task_names, $timers) = $task->Index();
+$times = $task->index();
 
-$total_time = $task->getTotalTime();
+$task_names = Task::getTaskNames();
+$task_colors = Color::getTaskColors();
+$border_colors = Color::getBorderColors();
+$total_time = Time::getTotalTime();
+$timers = Time::getTimers();
+
 ?>
 
 <?php include 'templates/header.php'?>
@@ -42,8 +47,10 @@ $total_time = $task->getTotalTime();
 
 <?php include 'templates/footer.php'?>
 <script>
-const task_names = <?php echo $task_names; ?>// $task_namesをchart.jsへ
-const timers = <?php echo $timers; ?> // $timersをchart.jsへ
+const task_names = <?php echo $task_names; ?>;
+const timers = <?php echo $timers; ?>;
+const task_colors = <?php echo $task_colors; ?>;
+const border_colors = <?php echo $border_colors; ?>;
 </script>
 <script src="js/chart.js"></script>
 
