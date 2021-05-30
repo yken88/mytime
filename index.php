@@ -2,13 +2,15 @@
 // ini_set('display_errors', "On");
 require_once 'TasksController.php';
 
+// index.phpで表示する
 $task = new TasksController;
 $times = $task->index();
+$total_time = Time::getTotalTime();
 
+// chart.jsに渡す
 $task_names = Task::getTaskNames();
 $task_colors = Color::getTaskColors();
 $border_colors = Color::getBorderColors();
-$total_time = Time::getTotalTime();
 $timers = Time::getTimers();
 
 ?>
