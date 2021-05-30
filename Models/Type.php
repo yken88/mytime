@@ -2,9 +2,10 @@
 
 class Type
 {
+    const DB_FILE = 'config/db_connect.php';
     public static function all()
     {
-        require 'config/db_connect.php';
+        require DB_FILE;
 
         $sql = 'SELECT * FROM types';
         $result = mysqli_query($conn, $sql);

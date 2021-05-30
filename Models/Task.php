@@ -1,6 +1,8 @@
 <?php
 class Task
 {
+    const DB_FILE = 'config/db_connect.php';
+
     private $task_name;
     private $type;
     private $time;
@@ -27,7 +29,7 @@ class Task
 
     public static function all()
     {
-        require 'config/db_connect.php';
+        require self::DB_FILE;
 
         $sql = 'SELECT * FROM times';
         $result = mysqli_query($conn, $sql);
@@ -54,7 +56,7 @@ class Task
     // 新規登録。
     public static function create()
     {
-        require 'config/db_connect.php';
+        require self::DB_FILE;
         $task_name = $type = $time = $type_id = '';
         $errors = array('task_name' => '', 'type' => '', 'type_id' => '', 'time' => '');
 
